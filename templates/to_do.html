@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>To-Do List</title>
+</head>
+<body>
+    <h1>To-Do List</h1>
+    
+    <form method="post" action="/add_task">
+        <label for="content">New Task:</label>
+        <input type="text" id="content" name="content" required>
+        <button type="submit">Add Task</button>
+    </form>
+    
+    <ul>
+        {% for task in tasks %}
+        <li>
+            <form method="post" action="/edit_task/{{ task.id }}">
+                <input type="text" name="content" value="{{ task.content }}">
+                <button type="submit">Update</button>
+            </form>
+            <form method="get" action="/delete_task/{{ task.id }}">
+                <button type="submit">Delete</button>
+            </form>
+        </li>
+        {% endfor %}
+    </ul>
+
+    <a href="/logout">Logout</a>
+</body>
+</html>
